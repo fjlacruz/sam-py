@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  sam-py
+
+  Sample SAM Template for sam-py
+
+Globals:
+  Function:
+    Timeout: 3
+    Tracing: Active
+    LoggingConfig:
+      LogFormat: JSON
+  Api:
+    TracingEnabled: true
+
+Resources:
+  PyLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: PythonLambdaFunction # Nombre personalizado de la función Lambda
+      CodeUri: src/
+      Handler: app.lambda_handler
+      Runtime: python3.12
+      Architectures:
+      - x86_64
+      Events:
+        ProxyApi:
+          Type: Api
+          Properties:
+            Path: /{proxy+} # Wildcard path to accept any route
+            Method: ANY # Accept any HTTP method
+
+  ApplicationResourceGroup:
+    Type: AWS::ResourceGroups::Group
+    Properties:
+      Name: !Sub "ApplicationInsights-${AWS::StackName}-ResourceGroup" # Nombre claro del grupo de recursos
+      ResourceQuery:
+        Type: CLOUDFORMATION_STACK_1_0
+
+  ApplicationInsightsMonitoring:
+    Type: AWS::ApplicationInsights::Application
+    Properties:
+      ResourceGroupName: !Ref ApplicationResourceGroup
+      AutoConfigurationEnabled: 'true'
+
+Outputs:
+  HelloWorldApiEndpoint:
+    Description: API Gateway endpoint URL for Prod stage
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+
+  PyLambdaFunctionArn:
+    Description: ARN of the Lambda function
+    Value: !GetAtt PyLambdaFunction.Arn
+
+  PyLambdaFunctionIamRoleArn:
+    Description: ARN of the IAM Role created for the Lambda function
+    Value: !GetAtt PyLambdaFunctionRole.Arn

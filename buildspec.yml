@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+    commands:
+    - pip install -r requirements.txt
+  build:
+    commands:
+    - zip -r package.zip .
+    - aws s3 cp package.zip s3://lambda-packagecode-zip/package.zip --region us-east-1
