@@ -140,8 +140,6 @@ pip install -r requirements.txt  (install all dependencies)
 pip freeze > requirements.txt   (save all dependencies )
 
 
-
-
 pytest --cov=src tests/
 pytest --cov=src --cov-fail-under=80 --cov-branch tests/
 pytest --cov=src --cov-report=html tests/
