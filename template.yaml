@@ -18,7 +18,7 @@ Resources:
   PyLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: PythonLambdaFunction # Nombre personalizado de la función Lambda
+      FunctionName: cdk-lambda-py # Nombre personalizado de la función Lambda
       CodeUri: src/
       Handler: app.lambda_handler
       Runtime: python3.12
