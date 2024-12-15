@@ -4,4 +4,4 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       Name: cdk-lambda-py # Nombre exacto de tu función Lambda
-      Alias: dev # Alias que CodeDeploy gestionará
+      Alias: dev # Alias que CodeDeploy gestionará...
