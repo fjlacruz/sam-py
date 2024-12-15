@@ -4,5 +4,5 @@ Resources:
     Type: AWS::Lambda::Function
     Properties:
       Name: cdk-lambda-py
-      Alias: dev
-      CurrentVersion: $LATEST
+      Alias: dev # Usa el alias 'dev' en lugar de $LATEST
+      CurrentVersion: !Ref "LambdaFunctionVersion" # O usa referencia a la versión si es necesario

@@ -9,8 +9,11 @@ phases:
     - pip install -r requirements.txt
   build:
     commands:
-    - zip -r function.zip .
+    - zip -r function.zip . # Comprime todo el código y archivos
+    - zip -g function.zip appspec.yml # Agrega el appspec.yml al zip
+
 artifacts:
   files:
+  - appspec.yml
   - function.zip
   discard-paths: yes
