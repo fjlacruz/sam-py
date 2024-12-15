@@ -5,4 +5,4 @@ Resources:
     Properties:
       Name: cdk-lambda-py # Nombre exacto de tu función Lambda
       Alias: dev # Alias que CodeDeploy gestionará
-      CurrentVersion: !GetAtt myLambdaFunction.Version # Obtiene la versión actual de la función
+      CurrentVersion: 26 # Obtiene la versión actual de la función
