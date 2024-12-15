@@ -37,6 +37,6 @@ def handle(event, context):
     return {
         "statusCode": 200,
         "body": json.dumps({
-            "message": "Hello from /hello...!!!!!!!"
+            "message": "Hello from /hello. change 9"
         }),
     }

@@ -1,7 +1,12 @@
 version: 0.0
+
 Resources:
 - myLambdaFunction:
     Type: AWS::Lambda::Function
     Properties:
       Name: cdk-lambda-py # Nombre exacto de tu función Lambda
-      Alias: dev # Alias que CodeDeploy gestionará
+      Alias: prod # Alias para el despliegue en producción
+      CurrentVersion: !GetAtt myLambdaFunction.Version
+      Code:
+        S3Bucket: lambdastack-deployment-bucket # Reemplaza con el nombre de tu bucket de despliegue
+        S3Key: function.zip
