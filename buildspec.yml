@@ -7,13 +7,15 @@ phases:
     commands:
     - echo Instalando dependencias para la función Lambda...
     - pip install -r requirements.txt
-    - echo "DEPLOY_BUCKET=deployment-bucket-cdk-py"
-    - echo "BUILD_ARTIFACT=build.zip"
+    - echo "DEPLOY_BUCKET=deployment-bucket-cdk-py" >> $CODEBUILD_SRC_DIR/.env
+    - echo "BUILD_ARTIFACT=build.zip" >> $CODEBUILD_SRC_DIR/.env
 
   build:
     commands:
     - echo Empaquetando la función Lambda...
     - zip -r build.zip .
+    - echo "DEPLOY_BUCKET=$DEPLOY_BUCKET"
+    - echo "BUILD_ARTIFACT=$BUILD_ARTIFACT"
 
   post_build:
     commands:
