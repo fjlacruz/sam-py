@@ -18,8 +18,6 @@ phases:
     commands:
     - echo Empaquetando la función Lambda...
     - zip -r build.zip . # Empaque el código de la función Lambda y sus dependencias en un archivo zip
-    - $(ls)" # Muestra los archivos en el directorio
-    - $(unzip -l build.zip)" # Muestra el contenido del archivo zip empaquetado
 
   post_build:
     commands:
