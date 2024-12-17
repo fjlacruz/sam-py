@@ -15,7 +15,11 @@ phases:
 
   post_build:
     commands:
+    - echo "==============================================================================================="
+    - echo "DEPLOY_BUCKET=$DEPLOY_BUCKET"
+    - echo "BUILD_ARTIFACT=$BUILD_ARTIFACT"
     - echo El código se ha empaquetado correctamente
+    - echo "==============================================================================================="
 
 artifacts:
   files:
