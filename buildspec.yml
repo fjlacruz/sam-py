@@ -3,17 +3,25 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.12
+      python: 3.12 # Especifica la versión de Python 3.12
     commands:
-    - ls
-    - pip install -r requirements.txt
+    - echo Instalando dependencias para la función Lambda...
+    - pip install -r requirements.txt # Instala las dependencias de Python desde el archivo requirements.txt
+
   build:
     commands:
-    - zip -r function.zip . # Comprime todo el código y archivos
-    - zip -g function.zip appspec.yml # Agrega el appspec.yml al zip
+    - echo Empaquetando la función Lambda...
+    - zip -r build.zip . # Empaque el código de la función Lambda y sus dependencias en un archivo zip
+
+  post_build:
+    commands:
+    - echo El código se ha empaquetado correctamente
 
 artifacts:
   files:
-  - appspec.yml
-  - function.zip
-  discard-paths: yes
+  - build.zip # Especifica el archivo zip que será utilizado en el despliegue
+
+env:
+  exported-variables:
+  - DEPLOY_BUCKET # Variable para el nombre del bucket de despliegue
+  - BUILD_ARTIFACT # Variable para el archivo artefacto a desplegar
