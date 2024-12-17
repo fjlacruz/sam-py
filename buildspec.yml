@@ -3,33 +3,29 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.12 # Especifica la versión de Python 3.12
+      python: 3.12
     commands:
     - echo Instalando dependencias para la función Lambda...
-    - pip install -r requirements.txt # Instala las dependencias de Python desde el archivo requirements.txt
-    - echo "DEPLOY_BUCKET=deployment-bucket-cdk-py" # Define el nombre del bucket
-    - echo "BUILD_ARTIFACT=build.zip" # Define el nombre del artefacto zip
-    env:
-      variables:
-        DEPLOY_BUCKET: "deployment-bucket-cdk-py" # Variable para el nombre del bucket de despliegue
-        BUILD_ARTIFACT: "build.zip" # Variable para el archivo artefacto a desplegar
+    - pip install -r requirements.txt
+    - echo "DEPLOY_BUCKET=deployment-bucket-cdk-py"
+    - echo "BUILD_ARTIFACT=build.zip"
 
   build:
     commands:
     - echo Empaquetando la función Lambda...
-    - zip -r build.zip . # Empaque el código de la función Lambda y sus dependencias en un archivo zip
+    - zip -r build.zip .
 
   post_build:
     commands:
-    - echo "DEPLOY_BUCKET=$DEPLOY_BUCKET" # Verifica el valor de DEPLOY_BUCKET
-    - echo "BUILD_ARTIFACT=$BUILD_ARTIFACT" # Verifica el valor de BUILD_ARTIFACT
+    - echo "DEPLOY_BUCKET=$DEPLOY_BUCKET"
+    - echo "BUILD_ARTIFACT=$BUILD_ARTIFACT"
     - echo El código se ha empaquetado correctamente
 
 artifacts:
   files:
-  - build.zip # Especifica el archivo zip que será utilizado en el despliegue
+  - build.zip
 
 env:
   exported-variables:
-  - DEPLOY_BUCKET # Exporta la variable DEPLOY_BUCKET
-  - BUILD_ARTIFACT # Exporta la variable BUILD_ARTIFACT
+  - DEPLOY_BUCKET
+  - BUILD_ARTIFACT
